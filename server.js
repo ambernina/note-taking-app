@@ -1,29 +1,28 @@
-  
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
 let app = express();
 const writeData = function(){
-  fs.writeFile("./db/db.json", JSON.stringify(data), err =>{
+  fs.writeFile("./Develop/db/db.json", JSON.stringify(data), err =>{
     if (err) throw err;
       // res.end();
 });
 }
-let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+let data = JSON.parse(fs.readFileSync("./Develop/db/db.json", "utf8"));
 console.log(data);
 
 app.use(express.urlencoded({extended: true}));
 
 app.use(express.json());
-app.use(express.static("./public"));
+app.use(express.static("./Develop/public"));
 
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, "./Develop/public/index.html"));
 });
 
 app.get("/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/notes.html"));
+  res.sendFile(path.join(__dirname, "./Develop/public/notes.html"));
 });
 
 app.post("/api/notes", function(req, res) {
